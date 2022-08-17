@@ -1,0 +1,127 @@
+:root {
+    --MainColor: rgb(23, 74, 102);
+    --AltColor: rgb(51, 102, 102);
+    --NeutColor: rgba(147, 159, 159, 1);
+    --Neut2Color: rgb(160, 151, 133);
+    --SerifFont: 'Bitter', serif;
+    --MonoFont: 'Cutive Mono', monospace;
+    --SansFont: 'Fira Sans', sans-serif;
+}
+
+body {
+    background-image: url("../images/deskWallpaper.avif");
+    background-attachment: fixed;
+    background-size: cover;
+    width: 100%;
+}
+
+header {
+    width: 100%;
+    margin-top: -10px;
+    padding: 20px 0;
+    text-align: center;
+    background-color: rgba(255, 255, 255, 0.7);
+}
+
+header h1 {
+    font-family: var(--SerifFont);
+    font-size: 40px;
+    line-height: 100%;
+    color: var(--MainColor);
+    margin: 0;
+    letter-spacing: 2px;
+}
+
+#theTeam {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-items: center;
+    align-content: space-around;
+    background-color: rgba(0, 0, 0, 0.4);
+    width: 90%;
+    margin: 2% 5%;
+}
+
+.empFlex {
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 10px;
+    margin: 10px;
+    width: 30%;
+    flex: 1;
+    text-align: center;
+}
+
+.empFlex h3 {
+    font-family: var(--SansFont);
+    font-size: 30px;
+    padding: 20px 0 5px;
+    margin: 0;
+    color: var(--AltColor);
+
+}
+
+.empFlex h4 {
+    font-family: var(--SerifFont);
+    font-size: 15px;
+    letter-spacing: 3px;
+    margin: 0;
+    padding: 0;
+    border-top: 1px solid var(--MainColor);
+    color: var(--MainColor);
+}
+
+.contactIcon {
+    display: inline-block;
+    width: 45%;
+    margin: 20px auto 0;
+    padding: 10px 0;
+    position: relative;
+    cursor: pointer;
+    background-color: var(--NeutColor);
+    color: var(--AltColor);
+}
+
+.contactText {
+    background-color: #fff;
+    color: #000;
+    font-family: var(--MonoFont);
+    padding: 5px;
+    box-shadow: 0 0 7px var(--MainColor);
+    position: absolute;
+    top: -15px;
+    opacity: 0;
+    transition: opacity 0.2s ease-in-out 0.5s;
+}
+
+.contactIcon:hover .contactText {
+    opacity: 1;
+}
+
+/* larger devices */
+@media screen and (max-width: 992px) {
+    .empFlex {
+        min-width: 40%;
+    }
+}
+
+/* medium devices */
+@media screen and (max-width: 768px) {
+    .empFlex {
+        min-width: 40%;
+    }
+}
+
+/* small devices */
+@media screen and (max-width: 576px) {
+    #theTeam {
+        flex-flow: column wrap;
+        width: 94%;
+        margin: 2%;
+    }
+    .empFlex {
+        padding: 1%;
+        margin: 1%;
+        width: 96%;
+    }
+}
