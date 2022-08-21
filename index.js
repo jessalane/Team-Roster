@@ -2,6 +2,7 @@
 const inquirer = require('inquirer');
 const fs = require('fs');
 const renderHTML = require('./assets/js/renderOutput.js');
+let team = [];
 
 // arrays of questions
 const roleQ = [
@@ -14,6 +15,12 @@ const roleQ = [
 ];
 
 const employeeQ = [
+    {
+        type: 'list',
+        message: 'What is this role for this employee?',
+        name: 'empRole',
+        choices: ['manager', 'engineer', 'employee', 'intern']
+    },
     {
         type: 'input',
         message: 'What the name of this employee?',
@@ -32,6 +39,12 @@ const employeeQ = [
 ];
 
 const engineerQ = [
+    {
+        type: 'list',
+        message: 'What is this role for this employee?',
+        name: 'empRole',
+        choices: ['manager', 'engineer', 'employee', 'intern']
+    },
     {
         type: 'input',
         message: 'What the name of this engineer?',
@@ -56,6 +69,12 @@ const engineerQ = [
 
 const managerQ = [
     {
+        type: 'list',
+        message: 'What is this role for this employee?',
+        name: 'empRole',
+        choices: ['manager', 'engineer', 'employee', 'intern']
+    },
+    {
         type: 'input',
         message: 'What the name of this manager?',
         name: 'manRole'
@@ -78,6 +97,12 @@ const managerQ = [
 ];
 
 const internQ = [
+    {
+        type: 'list',
+        message: 'What is this role for this employee?',
+        name: 'empRole',
+        choices: ['manager', 'engineer', 'employee', 'intern']
+    },
     {
         type: 'input',
         message: 'What the name of this intern?',
@@ -110,8 +135,68 @@ function init() {
     try {
         inquirer.prompt(roleQ)
         .then((answer) => {
-            const genHTML = renderHTML(answer);
+            if (answer.role == "intern") { 
+                internQuestions();
+            }
+            if (answer.role == "employee") {
+                employeeQuestions();
+            }
+            if (answer.role == "engineer") {
+                engineerQuestions();
+            }
+            if (answer.role == "manager") {
+                managerQuestions();
+            }
+            const genHTML = renderHTML(team);
             writeToFile(genHTML);
+        })
+    } catch(err) {
+        console.log(err);
+    }
+}
+
+function internQuestions() {
+    try {
+        inquirer.prompt(internQ)
+        .then((answer) => {
+            team += { answer };
+            return team;
+        })
+    } catch(err) {
+        console.log(err);
+    }
+}
+
+function employeeQuestions() {
+    try {
+        inquirer.prompt(employeeQ)
+        .then((answer) => {
+            team += { answer };
+            return team;
+        })
+    } catch(err) {
+        console.log(err);
+    }
+}
+
+function engineerQuestions() {
+    try {
+        inquirer.prompt(engineerQ)
+        .then((answer) => {
+            team += { answer };
+            return team;
+        })
+    } catch(err) {
+        console.log(err);
+    }
+}
+
+function managerQuestions() {
+    try {
+        inquirer.prompt(managerQ)
+        .then((answer) => {
+            team += { answer };
+            return team;
         })
     } catch(err) {
         console.log(err);
