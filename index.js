@@ -28,7 +28,7 @@ const employeeQ = [{
     {
         type: 'input',
         message: 'What the name of this employee?',
-        name: 'empRole'
+        name: 'empName'
     },
     {
         type: 'input',
@@ -51,7 +51,7 @@ const engineerQ = [{
     {
         type: 'input',
         message: 'What the name of this engineer?',
-        name: 'engRole'
+        name: 'engName'
     },
     {
         type: 'input',
@@ -79,7 +79,7 @@ const managerQ = [{
     {
         type: 'input',
         message: 'What the name of this manager?',
-        name: 'manRole'
+        name: 'manName'
     },
     {
         type: 'input',
@@ -94,7 +94,7 @@ const managerQ = [{
     {
         type: 'input',
         message: 'What the store number name of this manager?',
-        name: 'manStore'
+        name: 'manOffice'
     },
 ];
 
@@ -107,7 +107,7 @@ const internQ = [{
     {
         type: 'input',
         message: 'What the name of this intern?',
-        name: 'intRole'
+        name: 'intName'
     },
     {
         type: 'input',
@@ -127,10 +127,9 @@ const internQ = [{
 ];
 
 // function to write data to a readme file
-// function writeToFile(data) {
-//     fs.writeFileSync(`indexGen.html`, data, (err) => console.error(err));
-//     // find a way to clear the teamObjext.txt
-// };
+function writeToFile(data) {
+    fs.writeFileSync(`indexGen.html`, data, (err) => console.error(err));
+};
 
 // initialize funciton to run the questions
 function init() {
@@ -159,11 +158,9 @@ function internQuestions() {
     try {
         inquirer.prompt(internQ)
             .then((answer) => {
-                fs.appendFile('teamObject.txt', JSON.stringify(answer), function (err) {
-                    if (err) throw err;
-                    console.log('Saved!');
-                });
+                team.push(answer);
                 anotherTeamQ();
+                return team;
             })
     } catch (err) {
         console.log(err);
@@ -174,11 +171,9 @@ function employeeQuestions() {
     try {
         inquirer.prompt(employeeQ)
             .then((answer) => {
-                fs.appendFile('teamObject.txt', JSON.stringify(answer), function (err) {
-                    if (err) throw err;
-                    console.log('Saved!');
-                });
+                team.push(answer);
                 anotherTeamQ();
+                return team;
             })
     } catch (err) {
         console.log(err);
@@ -189,11 +184,9 @@ function engineerQuestions() {
     try {
         inquirer.prompt(engineerQ)
             .then((answer) => {
-                fs.appendFile('teamObject.txt', JSON.stringify(answer), function (err) {
-                    if (err) throw err;
-                    console.log('Saved!');
-                });
+                team.push(answer);
                 anotherTeamQ();
+                return team;
             })
     } catch (err) {
         console.log(err);
@@ -204,11 +197,9 @@ function managerQuestions() {
     try {
         inquirer.prompt(managerQ)
             .then((answer) => {
-                fs.appendFile('teamObject.txt', JSON.stringify(answer), function (err) {
-                    if (err) throw err;
-                    console.log('Saved!');
-                });
+                team.push(answer);
                 anotherTeamQ();
+                return team;
             })
     } catch (err) {
         console.log(err);
@@ -222,27 +213,14 @@ function anotherTeamQ() {
                 if (answer.another == "yes") {
                     init();
                 } else {
-                    writeTeamObject();
-                    // const genHTML = renderHTML(team);
-                    // writeToFile(genHTML);
+                    const genHTML = renderHTML(team);
+                    writeToFile(genHTML);
                 }
             })
     } catch (err) {
         console.log(err);
     }
 }
-
-// async function writeTeamObject(url) {
-//     try {
-//         const response = await fetch(url);
-//         const data = await response.text();
-//         console.log(data);
-//     } catch (err) {
-//         console.error(err);
-//     }
-// }
-
-// writeTeamObject('../Team-Roster/teamObject.txt');
 
 // calling init function
 init();

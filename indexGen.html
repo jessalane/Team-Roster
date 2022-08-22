@@ -1,5 +1,4 @@
-function renderIndex(data) {
-    return `
+
     <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -22,101 +21,98 @@ function renderIndex(data) {
     <header><h1>Meet The Team</h1></header>
     <section id="theTeam">
 
-    ${renderTeam(data)}
-
-    </section>
-</body>
-</html>
-    `;
-}
-
-function renderTeam(data) {
-    let teamHTML = ``;
-    for (let i = 0; i < data.length; i++) {
-        if (data[i].role == "employee") {
-            teamHTML += `
-<${data[i].role}>
+    
+<engineer>
 <div class="empFlex">
-<h3>${data[i].empName}</h3>
-<h4>${data[i].role} #${data[i].empId}</h4>
+<h3>undefined</h3>
+<h4>engineer #undefined</h4>
 <div class="contactIcon">
 <i class="fas fa-envelope"></i>
 <div class="contactText">
-${data[i].empEmail}
-</div>
-</div>
-</div>
-</${data[i].role}>
-            `
-        }
-        if (data[i].role = "engineer") {
-            teamHTML += `
-<${data[i].role}>
-<div class="empFlex">
-<h3>${data[i].engName}</h3>
-<h4>${data[i].role} #${data[i].engId}</h4>
-<div class="contactIcon">
-<i class="fas fa-envelope"></i>
-<div class="contactText">
-${data[i].engEmail}
+undefined
 </div>
 </div>
 <div class="contactIcon">
 <i class="fab fa-github"></i> 
 <div class="contactText">
-<a href="https://github.com/${data[i].engGit}">${data[i].engGit}</a>
+<a href="https://github.com/undefined">undefined</a>
 </div>
 </div>
 </div>
-</${data[i].role}>
-            `
-        }
-        if (data[i].role == "manager") {
-            teamHTML += `
-<${data[i].role}>
+</engineer>
+            
+<engineer>
 <div class="empFlex">
-<h3>${data[i].manName}</h3>
-<h4>${data[i].role} #${data[i].manId}</h4>
+<h3>Jane Doe</h3>
+<h4>engineer #2</h4>
 <div class="contactIcon">
 <i class="fas fa-envelope"></i>
 <div class="contactText">
-${data[i].manEmail}
+email@domain.com
 </div>
 </div>
 <div class="contactIcon">
-<i class="fas fa-building"></i>
+<i class="fab fa-github"></i> 
 <div class="contactText">
-Office #${data[i].manOffice}
+<a href="https://github.com/JaneDoe">JaneDoe</a>
 </div>
 </div>
 </div>
-</${data[i].role}>
-            `
-        }
-        if (data[i].role == "intern") {
-            teamHTML += `
-<${data[i].role}>
+</engineer>
+            
+<employee>
 <div class="empFlex">
-<h3>${data[i].intName}</h3>
-<h4>${data[i].role} #${data[i].intId}</h4>
+<h3>Jim Doe</h3>
+<h4>employee #3</h4>
 <div class="contactIcon">
 <i class="fas fa-envelope"></i>
 <div class="contactText">
-${data[i].intEmail}
+email@domain.com
+</div>
+</div>
+</div>
+</employee>
+            
+<engineer>
+<div class="empFlex">
+<h3>undefined</h3>
+<h4>engineer #undefined</h4>
+<div class="contactIcon">
+<i class="fas fa-envelope"></i>
+<div class="contactText">
+undefined
 </div>
 </div>
 <div class="contactIcon">
-<i class="fas fa-graduation-cap"></i>
+<i class="fab fa-github"></i> 
 <div class="contactText">
-${data[i].intSchool}
+<a href="https://github.com/undefined">undefined</a>
 </div>
 </div>
 </div>
-</${data[i].role}>
-            `
-        }
-    }
-    return teamHTML;
-}
-// exporting the genmarkdown function to index.js
-module.exports = renderIndex;
+</engineer>
+            
+<engineer>
+<div class="empFlex">
+<h3>undefined</h3>
+<h4>engineer #undefined</h4>
+<div class="contactIcon">
+<i class="fas fa-envelope"></i>
+<div class="contactText">
+undefined
+</div>
+</div>
+<div class="contactIcon">
+<i class="fab fa-github"></i> 
+<div class="contactText">
+<a href="https://github.com/undefined">undefined</a>
+</div>
+</div>
+</div>
+</engineer>
+            
+
+    </section>
+</body>
+</html>
+    
