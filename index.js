@@ -2,24 +2,28 @@
 const inquirer = require('inquirer');
 const fs = require('fs');
 const renderHTML = require('./assets/js/renderOutput.js');
-let team = [];
+const team = [];
 
 // arrays of questions
-const roleQ = [
-    {
-        type: 'list',
-        message: 'What is this role for this employee?',
-        name: 'empRole',
-        choices: ['manager', 'engineer', 'employee', 'intern']
-    },
-];
+const roleQ = [{
+    type: 'list',
+    message: 'What is this role for this employee?',
+    name: 'role',
+    choices: ['manager', 'engineer', 'employee', 'intern']
+}, ];
 
-const employeeQ = [
-    {
+const anotherQ = [{
+    type: 'list',
+    message: 'Whould you like to add another team member?',
+    name: 'another',
+    choices: ['yes', 'no']
+}, ];
+
+const employeeQ = [{
         type: 'list',
         message: 'What is this role for this employee?',
-        name: 'empRole',
-        choices: ['manager', 'engineer', 'employee', 'intern']
+        name: 'role',
+        choices: ['employee']
     },
     {
         type: 'input',
@@ -38,12 +42,11 @@ const employeeQ = [
     },
 ];
 
-const engineerQ = [
-    {
+const engineerQ = [{
         type: 'list',
         message: 'What is this role for this employee?',
-        name: 'empRole',
-        choices: ['manager', 'engineer', 'employee', 'intern']
+        name: 'role',
+        choices: ['engineer']
     },
     {
         type: 'input',
@@ -67,12 +70,11 @@ const engineerQ = [
     },
 ];
 
-const managerQ = [
-    {
+const managerQ = [{
         type: 'list',
         message: 'What is this role for this employee?',
-        name: 'empRole',
-        choices: ['manager', 'engineer', 'employee', 'intern']
+        name: 'role',
+        choices: ['manager']
     },
     {
         type: 'input',
@@ -96,12 +98,11 @@ const managerQ = [
     },
 ];
 
-const internQ = [
-    {
+const internQ = [{
         type: 'list',
         message: 'What is this role for this employee?',
-        name: 'empRole',
-        choices: ['manager', 'engineer', 'employee', 'intern']
+        name: 'role',
+        choices: ['intern']
     },
     {
         type: 'input',
@@ -126,31 +127,30 @@ const internQ = [
 ];
 
 // function to write data to a readme file
-function writeToFile(data) {
-    fs.writeFileSync(`indexGen.html`, data, (err) => console.error(err));
-};
+// function writeToFile(data) {
+//     fs.writeFileSync(`indexGen.html`, data, (err) => console.error(err));
+//     // find a way to clear the teamObjext.txt
+// };
 
 // initialize funciton to run the questions
 function init() {
     try {
         inquirer.prompt(roleQ)
-        .then((answer) => {
-            if (answer.role == "intern") { 
-                internQuestions();
-            }
-            if (answer.role == "employee") {
-                employeeQuestions();
-            }
-            if (answer.role == "engineer") {
-                engineerQuestions();
-            }
-            if (answer.role == "manager") {
-                managerQuestions();
-            }
-            const genHTML = renderHTML(team);
-            writeToFile(genHTML);
-        })
-    } catch(err) {
+            .then((answer) => {
+                if (answer.role == "intern") {
+                    internQuestions();
+                }
+                if (answer.role == "employee") {
+                    employeeQuestions();
+                }
+                if (answer.role == "engineer") {
+                    engineerQuestions();
+                }
+                if (answer.role == "manager") {
+                    managerQuestions();
+                }
+            })
+    } catch (err) {
         console.log(err);
     }
 }
@@ -158,11 +158,14 @@ function init() {
 function internQuestions() {
     try {
         inquirer.prompt(internQ)
-        .then((answer) => {
-            team += { answer };
-            return team;
-        })
-    } catch(err) {
+            .then((answer) => {
+                fs.appendFile('teamObject.txt', JSON.stringify(answer), function (err) {
+                    if (err) throw err;
+                    console.log('Saved!');
+                });
+                anotherTeamQ();
+            })
+    } catch (err) {
         console.log(err);
     }
 }
@@ -170,11 +173,14 @@ function internQuestions() {
 function employeeQuestions() {
     try {
         inquirer.prompt(employeeQ)
-        .then((answer) => {
-            team += { answer };
-            return team;
-        })
-    } catch(err) {
+            .then((answer) => {
+                fs.appendFile('teamObject.txt', JSON.stringify(answer), function (err) {
+                    if (err) throw err;
+                    console.log('Saved!');
+                });
+                anotherTeamQ();
+            })
+    } catch (err) {
         console.log(err);
     }
 }
@@ -182,11 +188,14 @@ function employeeQuestions() {
 function engineerQuestions() {
     try {
         inquirer.prompt(engineerQ)
-        .then((answer) => {
-            team += { answer };
-            return team;
-        })
-    } catch(err) {
+            .then((answer) => {
+                fs.appendFile('teamObject.txt', JSON.stringify(answer), function (err) {
+                    if (err) throw err;
+                    console.log('Saved!');
+                });
+                anotherTeamQ();
+            })
+    } catch (err) {
         console.log(err);
     }
 }
@@ -194,14 +203,46 @@ function engineerQuestions() {
 function managerQuestions() {
     try {
         inquirer.prompt(managerQ)
-        .then((answer) => {
-            team += { answer };
-            return team;
-        })
-    } catch(err) {
+            .then((answer) => {
+                fs.appendFile('teamObject.txt', JSON.stringify(answer), function (err) {
+                    if (err) throw err;
+                    console.log('Saved!');
+                });
+                anotherTeamQ();
+            })
+    } catch (err) {
         console.log(err);
     }
 }
+
+function anotherTeamQ() {
+    try {
+        inquirer.prompt(anotherQ)
+            .then((answer) => {
+                if (answer.another == "yes") {
+                    init();
+                } else {
+                    writeTeamObject();
+                    // const genHTML = renderHTML(team);
+                    // writeToFile(genHTML);
+                }
+            })
+    } catch (err) {
+        console.log(err);
+    }
+}
+
+// async function writeTeamObject(url) {
+//     try {
+//         const response = await fetch(url);
+//         const data = await response.text();
+//         console.log(data);
+//     } catch (err) {
+//         console.error(err);
+//     }
+// }
+
+// writeTeamObject('../Team-Roster/teamObject.txt');
 
 // calling init function
 init();
