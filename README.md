@@ -1,7 +1,5 @@
 
   # Team Roster Generator
-  -------
-
 
   ## Description
   This application is a node based program that will develop an index for a meet the team page. It will include an email for each of the team members, and their employee number. Engineers will provide a link to their github account, interns will list their school, and managers provide their office number.
