@@ -43,7 +43,7 @@ header h1 {
     margin: 2% 5%;
 }
 
-.empFlex {
+manager, employee, engineer, intern {
     background-color: rgba(255, 255, 255, 0.9);
     padding: 10px;
     margin: 10px;
@@ -52,7 +52,7 @@ header h1 {
     text-align: center;
 }
 
-.empFlex h3 {
+manager h3, employee h3, engineer h3, intern h3  {
     font-family: var(--SansFont);
     font-size: 30px;
     padding: 20px 0 5px;
@@ -61,7 +61,7 @@ header h1 {
 
 }
 
-.empFlex h4 {
+manager h4, employee h4, engineer h4, intern h4 {
     font-family: var(--SerifFont);
     font-size: 15px;
     letter-spacing: 3px;
@@ -82,6 +82,10 @@ header h1 {
     color: var(--AltColor);
 }
 
+employee .contactIcon {
+    width: 95%;
+}
+
 .contactText {
     background-color: #fff;
     color: #000;
@@ -96,18 +100,19 @@ header h1 {
 
 .contactIcon:hover .contactText {
     opacity: 1;
+    z-index: 999;
 }
 
 /* larger devices */
 @media screen and (max-width: 992px) {
-    .empFlex {
+    manager, employee, engineer, intern {
         min-width: 40%;
     }
 }
 
 /* medium devices */
 @media screen and (max-width: 768px) {
-    .empFlex {
+    manager, employee, engineer, intern {
         min-width: 40%;
     }
 }
@@ -119,7 +124,7 @@ header h1 {
         width: 94%;
         margin: 2%;
     }
-    .empFlex {
+    manager, employee, engineer, intern {
         padding: 1%;
         margin: 1%;
         width: 96%;
