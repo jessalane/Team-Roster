@@ -36,13 +36,13 @@ function renderTeam(data) {
         if (data[i].role == "employee") {
             teamHTML += `
 <${data[i].role}>
-<h3>${data[i].empName}</h3>
-<h4>${data[i].role} #${data[i].empId}</h4>
+<h3>${data[i].name}</h3>
+<h4>${data[i].role} #${data[i].id}</h4>
 <div class="contactIcon">
 <i class="fas fa-envelope"></i>
 <div class="contactText">
-<a href="mailto:${data[i].empEmail}">
-${data[i].empEmail}
+<a href="mailto:${data[i].email}">
+${data[i].email}
 </a>
 </div>
 </div>
@@ -52,20 +52,20 @@ ${data[i].empEmail}
         if (data[i].role == "engineer") {
             teamHTML += `
 <${data[i].role}>
-<h3>${data[i].engName}</h3>
-<h4>${data[i].role} #${data[i].engId}</h4>
+<h3>${data[i].name}</h3>
+<h4>${data[i].role} #${data[i].id}</h4>
 <div class="contactIcon">
 <i class="fas fa-envelope"></i>
 <div class="contactText">
-<a href="mailto:${data[i].engEmail}">
-${data[i].engEmail}
+<a href="mailto:${data[i].email}">
+${data[i].email}
 </a>
 </div>
 </div>
 <div class="contactIcon">
 <i class="fab fa-github"></i> 
 <div class="contactText">
-<a href="https://github.com/${data[i].engGit}">${data[i].engGit}</a>
+<a href="https://github.com/${data[i].gitName}">${data[i].gitName}</a>
 </div>
 </div>
 </${data[i].role}>
@@ -74,20 +74,20 @@ ${data[i].engEmail}
         if (data[i].role == "manager") {
             teamHTML += `
 <${data[i].role}>
-<h3>${data[i].manName}</h3>
-<h4>${data[i].role} #${data[i].manId}</h4>
+<h3>${data[i].name}</h3>
+<h4>${data[i].role} #${data[i].id}</h4>
 <div class="contactIcon">
 <i class="fas fa-envelope"></i>
 <div class="contactText">
-<a href="mailto:${data[i].manEmail}">
-${data[i].manEmail}
+<a href="mailto:${data[i].email}">
+${data[i].email}
 </a>
 </div>
 </div>
 <div class="contactIcon">
 <i class="fas fa-building"></i>
 <div class="contactText">
-Office #${data[i].manOffice}
+Office #${data[i].officeNum}
 </div>
 </div>
 </${data[i].role}>
@@ -96,20 +96,20 @@ Office #${data[i].manOffice}
         if (data[i].role == "intern") {
             teamHTML += `
 <${data[i].role}>
-<h3>${data[i].intName}</h3>
-<h4>${data[i].role} #${data[i].intId}</h4>
+<h3>${data[i].name}</h3>
+<h4>${data[i].role} #${data[i].id}</h4>
 <div class="contactIcon">
 <i class="fas fa-envelope"></i>
 <div class="contactText">
-<a href="mailto:${data[i].intEmail}">
-${data[i].intEmail}
+<a href="mailto:${data[i].email}">
+${data[i].email}
 </a>
 </div>
 </div>
 <div class="contactIcon">
 <i class="fas fa-graduation-cap"></i>
 <div class="contactText">
-${data[i].intSchool}
+${data[i].school}
 </div>
 </div>
 </${data[i].role}>

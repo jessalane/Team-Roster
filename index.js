@@ -2,6 +2,11 @@
 const inquirer = require('inquirer');
 const fs = require('fs');
 const renderHTML = require('./assets/js/renderOutput.js');
+const employee = require('./assets/js/employee.js');
+const engineer = require('./assets/js/engineer.js');
+const manager = require('./assets/js/manager.js');
+const intern = require('./assets/js/intern.js');
+
 const team = [];
 
 // arrays of questions
@@ -154,11 +159,14 @@ function init() {
     }
 }
 
+// functions to create an object for each individual group
 function internQuestions() {
     try {
         inquirer.prompt(internQ)
             .then((answer) => {
-                team.push(answer);
+                let newIntern = new intern(answer.role, answer.intName, answer.intEmail, Number(answer.intId), answer.intSchool);
+
+                team.push(newIntern);
                 anotherTeamQ();
                 return team;
             })
@@ -171,7 +179,9 @@ function employeeQuestions() {
     try {
         inquirer.prompt(employeeQ)
             .then((answer) => {
-                team.push(answer);
+                let newEmployee = new employee(answer.role, answer.empName, answer.empEmail, Number(answer.empId));
+                
+                team.push(newEmployee);
                 anotherTeamQ();
                 return team;
             })
@@ -184,7 +194,9 @@ function engineerQuestions() {
     try {
         inquirer.prompt(engineerQ)
             .then((answer) => {
-                team.push(answer);
+                let newEngineer = new intern(answer.role, answer.engName, answer.engEmail, Number(answer.engId), answer.engGit);
+                
+                team.push(newEngineer);
                 anotherTeamQ();
                 return team;
             })
@@ -197,7 +209,10 @@ function managerQuestions() {
     try {
         inquirer.prompt(managerQ)
             .then((answer) => {
-                team.push(answer);
+                console.log(typeof answer.manId);
+                let newManager = new manager(answer.role, answer.manName, answer.manEmail, Number(answer.manId), Number(answer.manOffice));
+                
+                team.push(newManager);
                 anotherTeamQ();
                 return team;
             })
@@ -206,6 +221,7 @@ function managerQuestions() {
     }
 }
 
+// sends back to init if they want to add more team members
 function anotherTeamQ() {
     try {
         inquirer.prompt(anotherQ)

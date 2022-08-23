@@ -1,3 +1,4 @@
+/* GLOBAL VARIABLES */
 :root {
     --MainColor: rgb(23, 74, 102);
     --AltColor: rgb(51, 102, 102);
@@ -8,6 +9,7 @@
     --SansFont: 'Fira Sans', sans-serif;
 }
 
+/* SETTING THE BODY BACKGROUND */
 body {
     background-image: url("../images/deskWallpaper.avif");
     background-attachment: fixed;
@@ -15,6 +17,7 @@ body {
     width: 100%;
 }
 
+/* SETTING THE HEADER BACKGROUND */
 header {
     width: 100%;
     margin-top: -10px;
@@ -23,6 +26,7 @@ header {
     background-color: rgba(255, 255, 255, 0.7);
 }
 
+/* STYLING THE HEADER TEXT */
 header h1 {
     font-family: var(--SerifFont);
     font-size: 40px;
@@ -32,6 +36,7 @@ header h1 {
     letter-spacing: 2px;
 }
 
+/* SETTING FLEX ON THE TEAM CONTAINER */
 #theTeam {
     display: flex;
     flex-flow: row wrap;
@@ -43,6 +48,7 @@ header h1 {
     margin: 2% 5%;
 }
 
+/* SETTING THE SAME FLEX ON ALL TEAM ELEMENTS */
 manager, employee, engineer, intern {
     background-color: rgba(255, 255, 255, 0.9);
     padding: 10px;
@@ -52,6 +58,7 @@ manager, employee, engineer, intern {
     text-align: center;
 }
 
+/* STYLING THE H3 HEADER FOR TEAM ELEMENTS */
 manager h3, employee h3, engineer h3, intern h3  {
     font-family: var(--SansFont);
     font-size: 30px;
@@ -61,6 +68,7 @@ manager h3, employee h3, engineer h3, intern h3  {
 
 }
 
+/* STYLING THE H4 HEADER FOR TEAM ELEMENTS */
 manager h4, employee h4, engineer h4, intern h4 {
     font-family: var(--SerifFont);
     font-size: 15px;
@@ -71,6 +79,7 @@ manager h4, employee h4, engineer h4, intern h4 {
     color: var(--MainColor);
 }
 
+/* STYLING THE CONTACT BOXES */
 .contactIcon {
     display: inline-block;
     width: 45%;
@@ -82,10 +91,12 @@ manager h4, employee h4, engineer h4, intern h4 {
     color: var(--AltColor);
 }
 
+/* CHANGING WIDTH FOR EMPLOYEES */
 employee .contactIcon {
     width: 95%;
 }
 
+/* STYLING THE HOVER BOX */
 .contactText {
     background-color: #fff;
     color: #000;
@@ -98,6 +109,7 @@ employee .contactIcon {
     transition: opacity 0.2s ease-in-out 0.5s;
 }
 
+/* CHANGING HOVER BOX OPACITY */
 .contactIcon:hover .contactText {
     opacity: 1;
     z-index: 999;

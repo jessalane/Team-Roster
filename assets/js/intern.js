@@ -1,5 +1,6 @@
 class intern {
-    constructor(name, email, id, school) {
+    constructor(role, name, email, id, school) {
+        this.role = role;
         this.name = name;
         this.email = email;
         this.id = id;
@@ -13,12 +14,16 @@ class intern {
             throw new Error("Expected parameter 'email' to be a non-negative string");
         }
 
-        if (typeof id !== "number" || isNaN(id) || id <= 0) {
+        if (typeof id !== "number" || isNaN(id) || id < 0) {
             throw new Error("Expected parameter 'id' to be a non-negative number");
         }
 
         if (typeof school !== "string" || school.length <= 0) {
             throw new Error("Expected parameter 'school' to be a non-negative string");
+        }
+
+        else {
+            return this;
         }
     }
     
@@ -35,7 +40,7 @@ class intern {
         console.log(`School: ${this.school}`);
     }
     getRole() {
-        console.log(`Role: intern`);
+        console.log(`Role: ${this.role}`);
     }
 }
 

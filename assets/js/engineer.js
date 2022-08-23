@@ -1,5 +1,6 @@
 class engineer {
-    constructor(name, email, id, gitName) {
+    constructor(role, name, email, id, gitName) {
+        this.role = role; 
         this.name = name;
         this.email = email;
         this.id = id;
@@ -13,12 +14,16 @@ class engineer {
             throw new Error("Expected parameter 'email' to be a non-negative string");
         }
 
-        if (typeof id !== "number" || isNaN(id) || id <= 0) {
+        if (typeof id !== "number" || isNaN(id) || id < 0) {
             throw new Error("Expected parameter 'id' to be a non-negative number");
         }
 
         if (typeof gitName !== "string" || gitName.length <= 0) {
             throw new Error("Expected parameter 'gitName' to be a non-negative string");
+        }
+
+        else {
+            return this;
         }
     }
 
@@ -33,10 +38,9 @@ class engineer {
     }
     getGitHub() {
         console.log(`GitHub: ${this.gitName}`);
-        console.log(`GitHubLink: https://github.com/${this.gitName}`)
     }
     getRole() {
-        console.log(`Role: engineer`);
+        console.log(`Role: ${this.role}`);
     }
 }
 
