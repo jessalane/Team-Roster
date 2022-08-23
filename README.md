@@ -6,9 +6,6 @@
   ## Description
   This application is a node based program that will develop an index for a meet the team page. It will include an email for each of the team members, and their employee number. Engineers will provide a link to their github account, interns will list their school, and managers provide their office number.
 
-  ## Installation
-  You run the tests by typing npm test into the console, and you start the application by typing in node index or node index.js
-
   ## Usage
   The following is a link to a screenshot of what the live index should look like on different viewports, as well as a video showing you how it operates in the terminal.
 
