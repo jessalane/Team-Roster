@@ -8,9 +8,9 @@
   The following is a link to a screenshot of what the live index should look like on different viewports, as well as a video showing you how it operates in the terminal.
 
 https://drive.google.com/file/d/1IQO1OVaNxYvMPfJfwqgAVvZ5zWmZJyF6/view
-  ![screenshot](./assets/images/full%20size%20screenshot.png)
-  ![screenshot](./assets/images/mid%20size%20screenshot.png)
-  ![screenshot](./assets/images/small%20size%20screenshot.png)
+  ![screenshot](./images/full%20size%20screenshot.png)
+  ![screenshot](./images/mid%20size%20screenshot.png)
+  ![screenshot](./images/small%20size%20screenshot.png)
   
 
   ---
