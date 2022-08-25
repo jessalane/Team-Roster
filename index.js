@@ -1,20 +1,27 @@
 // requried packages and imported files
 const inquirer = require('inquirer');
 const fs = require('fs');
-const renderHTML = require('./assets/js/renderOutput.js');
-const employee = require('./assets/js/employee.js');
-const engineer = require('./assets/js/engineer.js');
-const manager = require('./assets/js/manager.js');
-const intern = require('./assets/js/intern.js');
+const renderHTML = require('./src/renderOutput.JS');
+const employee = require('./lib/employee.js');
+const engineer = require('./lib/engineer.js');
+const manager = require('./lib/manager.js');
+const intern = require('./lib/intern.js');
 
 const team = [];
 
 // arrays of questions
-const roleQ = [{
+const teamStartQ = [{
     type: 'list',
-    message: 'What is this role for this employee?',
+    message: 'Hit enter to start creating your team.',
     name: 'role',
-    choices: ['manager', 'engineer', 'employee', 'intern']
+    choices: ['manager']
+}, ];
+
+const teamContQ = [{
+    type: 'list',
+    message: 'Select the role of the next employee.',
+    name: 'role',
+    choices: ['engineer', 'employee', 'intern']
 }, ];
 
 const anotherQ = [{
@@ -71,7 +78,7 @@ const engineerQ = [{
     {
         type: 'input',
         message: 'What the github name of this engineer?',
-        name: 'engGit'
+        name: 'gitName'
     },
 ];
 
@@ -133,13 +140,25 @@ const internQ = [{
 
 // function to write data to a readme file
 function writeToFile(data) {
-    fs.writeFileSync(`indexGen.html`, data, (err) => console.error(err));
+    fs.writeFileSync(`./dist/indexGen.html`, data, (err) => console.error(err));
 };
 
 // initialize funciton to run the questions
 function init() {
     try {
-        inquirer.prompt(roleQ)
+        inquirer.prompt(teamStartQ)
+            .then((answer) => {
+                managerQuestions();
+            })
+    } catch (err) {
+        console.log(err);
+    }
+}
+
+// initialize funciton to run the questions
+function buildTeam() {
+    try {
+        inquirer.prompt(teamContQ)
             .then((answer) => {
                 if (answer.role == "intern") {
                     internQuestions();
@@ -150,9 +169,6 @@ function init() {
                 if (answer.role == "engineer") {
                     engineerQuestions();
                 }
-                if (answer.role == "manager") {
-                    managerQuestions();
-                }
             })
     } catch (err) {
         console.log(err);
@@ -160,6 +176,52 @@ function init() {
 }
 
 // functions to create an object for each individual group
+function managerQuestions() {
+    try {
+        inquirer.prompt(managerQ)
+            .then((answer) => {
+                console.log(typeof answer.manId);
+                let newManager = new manager(answer.role, answer.manName, answer.manEmail, Number(answer.manId), Number(answer.manOffice));
+
+                team.push(newManager);
+                anotherTeamQ();
+                return team;
+            })
+    } catch (err) {
+        console.log(err);
+    }
+}
+
+function engineerQuestions() {
+    try {
+        inquirer.prompt(engineerQ)
+            .then((answer) => {
+                let newEngineer = new engineer(answer.role, answer.engName, answer.engEmail, Number(answer.engId), answer.gitName);
+
+                team.push(newEngineer);
+                anotherTeamQ();
+                return team;
+            })
+    } catch (err) {
+        console.log(err);
+    }
+}
+
+function employeeQuestions() {
+    try {
+        inquirer.prompt(employeeQ)
+            .then((answer) => {
+                let newEmployee = new employee(answer.role, answer.empName, answer.empEmail, Number(answer.empId));
+
+                team.push(newEmployee);
+                anotherTeamQ();
+                return team;
+            })
+    } catch (err) {
+        console.log(err);
+    }
+}
+
 function internQuestions() {
     try {
         inquirer.prompt(internQ)
@@ -175,59 +237,13 @@ function internQuestions() {
     }
 }
 
-function employeeQuestions() {
-    try {
-        inquirer.prompt(employeeQ)
-            .then((answer) => {
-                let newEmployee = new employee(answer.role, answer.empName, answer.empEmail, Number(answer.empId));
-                
-                team.push(newEmployee);
-                anotherTeamQ();
-                return team;
-            })
-    } catch (err) {
-        console.log(err);
-    }
-}
-
-function engineerQuestions() {
-    try {
-        inquirer.prompt(engineerQ)
-            .then((answer) => {
-                let newEngineer = new intern(answer.role, answer.engName, answer.engEmail, Number(answer.engId), answer.engGit);
-                
-                team.push(newEngineer);
-                anotherTeamQ();
-                return team;
-            })
-    } catch (err) {
-        console.log(err);
-    }
-}
-
-function managerQuestions() {
-    try {
-        inquirer.prompt(managerQ)
-            .then((answer) => {
-                console.log(typeof answer.manId);
-                let newManager = new manager(answer.role, answer.manName, answer.manEmail, Number(answer.manId), Number(answer.manOffice));
-                
-                team.push(newManager);
-                anotherTeamQ();
-                return team;
-            })
-    } catch (err) {
-        console.log(err);
-    }
-}
-
-// sends back to init if they want to add more team members
+// sends to build team to add more team members
 function anotherTeamQ() {
     try {
         inquirer.prompt(anotherQ)
             .then((answer) => {
                 if (answer.another == "yes") {
-                    init();
+                    buildTeam();
                 } else {
                     const genHTML = renderHTML(team);
                     writeToFile(genHTML);
